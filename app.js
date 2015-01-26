@@ -7,8 +7,10 @@ var bodyParser = require('body-parser');
 var mongo = require('mongoskin');
 var util = require('./util');
 
+var index = require('./routes/index');
+var currency = require('./routes/currency');
+
 var db = mongo.db("mongodb://localhost:27017/currency", {native_parser:true});
-var routes = require('./routes/index');
 var app = express();
 
 app.set('views', path.join(__dirname, 'views'));
@@ -28,7 +30,8 @@ app.use(function( req, res, next) {
     next();
 });
 
-app.use('/', routes);
+app.use('/', index);
+app.use('/currency', currency);
 
 app.use('/', function(req, res, next) {
     var err = new Error('Not Found');

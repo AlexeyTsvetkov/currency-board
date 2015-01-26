@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    h1 Quotations
+
+    table
+        thead
+            th Year
+            th Month
+            th Day
+            th Quotation
+            th Price
+        tbody
+            for q in quotations
+                tr
+                    td #{q.year}
+                    td #{q.month}
+                    td #{q.day}
+                    td #{q.from}/#{q.to}
+                    td
+                        a(href="/currency/#{q._id}", target="_blank") #{q.price}
