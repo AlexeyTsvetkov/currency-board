@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    h1 Tasks
+
+    table
+        thead
+            th Quotation
+            th From
+            th To
+            th Status
+            th Price
+        tbody
+            for t in tasks
+                tr
+                    td #{t.currency1}/#{t.currency2}
+                    td #{t.from.day}.#{t.from.month}.#{t.from.day}
+                    td #{t.to.day}.#{t.to.month}.#{t.to.day}
+                    td
+                        a(href="/tasks/#{t._id}", target="_blank") #{t.status}
+                    td #{t.value}

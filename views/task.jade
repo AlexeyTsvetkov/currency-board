@@ -1,0 +1,12 @@
+extends layout
+block content
+    h1
+        | Task #{_id}
+    p
+        | #{currency1}/#{currency2}
+        | from #{from.day}.#{from.month}.#{from.year}
+        | to #{from.day}.#{from.month}.#{from.year}
+    p
+        | task status: #{status}
+    p
+        | value: #{value}

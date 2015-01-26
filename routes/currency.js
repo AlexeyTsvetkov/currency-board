@@ -1,15 +1,16 @@
 var express = require('express');
 var util = require('../util');
+var collections = require('../collections');
 var router = express.Router();
 
-var quotations = "quotations";
+var quotations = collections.quotations;
 
 function quotationFromParams(params) {
     return {
-        year:  params.year,
-        month: params.month,
-        day:   params.day,
-        price: params.price,
+        year:  parseInt(params.year, 10),
+        month: parseInt(params.month, 10),
+        day:   parseInt(params.day, 10),
+        price: parseInt(params.price, 10),
         from: params.from.toLowerCase(),
         to: params.to.toLowerCase()
     }
@@ -64,7 +65,7 @@ router.get('/:id', function (req, res) {
     });
 });
 
-router.put('/:from/:to/:year/:month/:day/:price', function (req, res) {
+router.put('/:from/:to/:day/:month/:year/:price', function (req, res) {
     var quotation = quotationFromParams(req.params);
     req.db.collection(quotations).insert(quotation, function (err, result) {
         if (err) {
@@ -76,7 +77,7 @@ router.put('/:from/:to/:year/:month/:day/:price', function (req, res) {
     });
 });
 
-router.post('/:from/:to/:id/:year/:month/:day/:price', function (req, res) {
+router.post('/:from/:to/:day/:month/:year/:price', function (req, res) {
     var quotation = quotationFromParams(req.params);
     req.db.collection(quotations).updateById(req.params.id, quotation, function (err, result) {
         res.sendStatus(result === 1 ? 200 : 404);

@@ -9,6 +9,7 @@ var util = require('./util');
 
 var index = require('./routes/index');
 var currency = require('./routes/currency');
+var tasks = require('./routes/tasks');
 
 var db = mongo.db("mongodb://localhost:27017/currency", {native_parser:true});
 var app = express();
@@ -32,6 +33,7 @@ app.use(function( req, res, next) {
 
 app.use('/', index);
 app.use('/currency', currency);
+app.use('/tasks', tasks);
 
 app.use('/', function(req, res, next) {
     var err = new Error('Not Found');
